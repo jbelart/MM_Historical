@@ -1,6 +1,10 @@
 # MM_Historical
 Scripts for processing scanned aerial photographs. The core of these tools lays on the MicMac software, but other dependencies are needed for a straight-forward pipeline.
 
+Two cases are presented:
+
+exampleXXX.sh: Case where we have scanned 
+
 Dependencies:
 
 MicMac (https://micmac.ensg.eu/)
@@ -14,3 +18,6 @@ General unix tools: sed, awk, grep, sort
 GNU Parallel
 
 Rename
+
+Please cite:
+Belart et al., 2019
