@@ -25,4 +25,4 @@ General unix tools: sed, awk, grep, sort, rename
 For the steps requiring digitization of coordinates (pixel or ground), it's reccommended to simply use QGIS (www.qgis.org) and the module "coordinate capturer"
 
 If used, please cite:
-Belart, J. M. C., Magnússon, E., Berthier, E., Pálsson, F., Aðalgeirsdóttir, G., and Jóhannesson, T. (2019). The geodetic mass balance of Eyjafjallajökull ice cap for 1945–2014: processing guidelines and relation498to climate.Journal of Glaciology 65, 395–409. doi:10.1017/jog.2019.16
+Belart, J. M. C., Magnússon, E., Berthier, E., Pálsson, F., Aðalgeirsdóttir, G., and Jóhannesson, T. (2019). The geodetic mass balance of Eyjafjallajökull ice cap for 1945–2014: processing guidelines and relation to climate. Journal of Glaciology 65, 395–409. doi:10.1017/jog.2019.16
