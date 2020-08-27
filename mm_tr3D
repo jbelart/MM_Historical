@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# ------------------------------------------------------------------
+#  [belart] mm_tr3D.sh
+#  A series of routines that MicMac needs to convert between geographic and local frames
+#  Dependencies:
+#  -General unix tools: sed, awk, grep, sort
+#  -GNU Parallel
+# ------------------------------------------------------------------
+
+#These functions work assuming that a general variable named "loc3D" has been defined, indicating a rough location of a local 3D system. It also assumes that a genearl variable named "proj" has been defined, indicating a proj4 string
+
+#To create additional local systems, a python script can be ran, even from this script. E.g. py_ecef_enu -73.2 -48.9
+
+py_ecef_enu()
+{
+    cat > "ecef_enu.py" << EOF
+import numpy as np
+
+lat=$1
+lon=$2
+
+lat=np.radians(lat)
+lon=np.radians(lon)
+
+R=np.matrix([[-np.sin(lon),np.cos(lon),0],
+             [-np.cos(lon)*np.sin(lat),-np.sin(lon)*np.sin(lat),np.cos(lat)],
+             [np.cos(lon)*np.cos(lat),np.sin(lon)*np.cos(lat),np.sin(lat)]])
+
+np.set_printoptions(precision=15,suppress=True)
+
+print('Fw Trandsformation:',R.flatten())
+print('Bk Trandsformation:',R.I.flatten())
+EOF
+    python ecef_enu.py ; rm ecef_enu.py
+}
+
+tr3d_geo2local()  
+{
+    if [ "$loc3D" = "iceland" ]; then
+        awk '{ printf "%.3f %.3f %.3f\n", 0.325568154457157*$1 + 0.945518575599317*$2 + 0*$3, -0.842463219600284*$1 + 0.290083349689293*$2 + 0.453990499739547*$3, 0.429256450649358*$1 + -0.147804849141287*$2 + 0.891006524188368*$3 }'  ### ICELAND
+    elif [ "$loc3D" = "chile" ]; then
+        awk '{ printf "%.3f %.3f %.3f\n", 0.753563392301638*$1 + 0.657375245794096*$2, 0.629318139993623*$1 -0.721400928076764*$2 + 0.289031796944472*$3, 0.190002348558681*$1 -0.217803781388514*$2 -0.957319497532067*$3 }'  ### CHILE
+    fi
+}
+
+parallel_local2prj()
+{
+    if [ "$loc3D" = "iceland" ]; then
+        parallel -k --pipe awk \'{ printf \"\%.3f \%.3f \%.3f\\n\", 0.325568154457157*\$1+-0.842463219600284*\$2+0.429256450649358*\$3,0.945518575599317*\$1+0.290083349689293*\$2+-0.147804849141287*\$3,0*\$1+0.453990499739547*\$2+0.891006524188368*\$3 }\' | parallel -k --pipe cs2cs -f "%.4f" ${geoXYZ} +to ${proj} ###ICELAND
+    elif [ "$loc3D" = "chile" ]; then
+        parallel -k --pipe awk \'{ printf \"\%.3f \%.3f \%.3f\\n\", 0.753563392301638*\$1 + 0.629318139993623*\$2 + 0.190002348558681*\$3, 0.657375245794096*\$1 -0.721400928076764*\$2 -0.217803781388514*\$3, 0.289031796944472*\$2 -0.957319497532067*\$3 }\' | parallel -k --pipe cs2cs -f "%.4f" ${geoXYZ} +to ${proj} ###CHILE
+    fi
+}
+
+parallel_prj2local()
+#Work in progress
+#Useful if we want to convert a DEM into a local system, for example for orthorectification or as a help for Malt
+{
+    if [ "$loc3D" = "iceland" ]; then
+        echo "asdf"
+    elif [ "$loc3D" = "chile" ]; then
+        echo "asdf"
+    fi
+}
