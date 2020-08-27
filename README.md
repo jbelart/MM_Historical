@@ -1,7 +1,7 @@
 # MM_Historical
 Scripts for processing scanned aerial photographs. The core of these tools lays on the MicMac software, but other dependencies are needed for a straight-forward pipeline.
 
-The first step from scanned aerial photographs is to measure the fiducials. In MicMac, the best way is to measure and crop them, to re-create the case of a digital camera. An example to crop the images is given in crop.sh
+The first step from scanned aerial photographs is to measure the fiducials. In MicMac, the best way is to measure and crop them, to re-create the case of a digital camera. An example to crop the images is given in crop_withfid.sh. If no fiducials are available, another example can be seen in crop_nofid.sh
 
 With the cropped images, two cases are presented for processing. Both cases need Ground Control Points (GCPs).
 
