@@ -17,11 +17,9 @@ Ames StereoPipeline (https://ti.arc.nasa.gov/tech/asr/groups/intelligent-robotic
 
 GDAL (https://www.gdal.org/)
 
-General unix tools: sed, awk, grep, sort
+GNU Parallel (https://www.gnu.org/software/parallel/)
 
-GNU Parallel
+General unix tools: sed, awk, grep, sort, rename
 
-Rename
-
-Please cite:
-Belart et al., 2019
+If used, please cite:
+Belart, J. M. C., Magnússon, E., Berthier, E., Pálsson, F., Aðalgeirsdóttir, G., and Jóhannesson, T. (2019). The geodetic mass balance of Eyjafjallajökull ice cap for 1945–2014: processing guidelines and relation498to climate.Journal of Glaciology65, 395–409. doi:10.1017/jog.2019.16
