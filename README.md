@@ -1,9 +1,13 @@
 # MM_Historical
 Scripts for processing scanned aerial photographs. The core of these tools lays on the MicMac software, but other dependencies are needed for a straight-forward pipeline.
 
-Two cases are presented:
+The first step from scanned aerial photographs is to measure the fiducials. In MicMac, the best way is to measure and crop them, to re-create the case of a digital camera. An example to crop the images is given in crop.sh
 
-exampleXXX.sh: Case where we have scanned 
+With the cropped images, two cases are presented for processing. Both cases need Ground Control Points (GCPs).
+
+example_micmac_demref.sh: Case where we have a reference HR DEM (and if needed, an orthoimage perfectly aligned to the DEM), to extract ground coordinates.
+
+example_micmac_norefdem.sh: Case where we do not have a HR DEM, but we have an "old style" list of GCPs with XYZ coordinates (e.g. GPS-based)
 
 Dependencies:
 
